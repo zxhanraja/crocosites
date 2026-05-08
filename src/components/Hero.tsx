@@ -2,7 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import Image from "next/image";
+import Link from "next/link";
 import { useTranslation } from "@/lib/TranslationContext";
+
+interface HeroProps {
+  startAnimations?: boolean;
+}
 
 export default function Hero({ startAnimations = true }: HeroProps) {
   const containerRef = useRef<HTMLElement>(null);

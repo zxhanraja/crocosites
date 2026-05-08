@@ -27,110 +27,103 @@ export default function Loader({ onComplete }: LoaderProps) {
   const text = "Crocosites.";
 
   useEffect(() => {
-    // Removed session check to show loader on every refresh for development
-    /*
-    if (typeof window !== "undefined" && sessionStorage.getItem("croco_loaded")) {
-      setVisible(false);
-      onComplete();
-      return;
-    }
-    */
-
     const loader = loaderRef.current;
     const dot = dotRef.current;
     const textEl = textRef.current;
     if (!loader || !dot || !textEl) return;
 
-    const letters = Array.from(textEl.querySelectorAll<HTMLElement>(".croco-letter"));
-    const particles = particleRefs.current.filter(Boolean) as HTMLDivElement[];
+    const ctx = gsap.context(() => {
+      const letters = Array.from(textEl.querySelectorAll<HTMLElement>(".croco-letter"));
+      const particles = particleRefs.current.filter(Boolean) as HTMLDivElement[];
 
-    // Initial states
-    gsap.set(dot, { 
-      xPercent: -50, 
-      y: -100, // Start above the screen
-      scaleX: 1, 
-      scaleY: 1, 
-      opacity: 1 
-    });
-    gsap.set(letters, { y: 40, opacity: 0 });
-    gsap.set(textEl, { opacity: 0 });
-    gsap.set(particles, { x: 0, y: 0, opacity: 0, scale: 1 });
+      // Initial states
+      gsap.set(dot, { 
+        xPercent: -50, 
+        y: -100, // Start above the screen
+        scaleX: 1, 
+        scaleY: 1, 
+        opacity: 1 
+      });
+      gsap.set(letters, { y: 40, opacity: 0 });
+      gsap.set(textEl, { opacity: 0 });
+      gsap.set(particles, { x: 0, y: 0, opacity: 0, scale: 1 });
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        sessionStorage.setItem("croco_loaded", "1");
-        setVisible(false);
-        onComplete();
-      },
-    });
+      const tl = gsap.timeline({
+        onComplete: () => {
+          sessionStorage.setItem("croco_loaded", "1");
+          setVisible(false);
+          onComplete();
+        },
+      });
 
-    // 1 — Dot falls with gravity to EXACT center
-    tl.to(dot, {
-      y: "50vh",
-      duration: 0.5, // Faster fall
-      ease: "power2.in",
-    })
+      // 1 — Dot falls with gravity to EXACT center
+      tl.to(dot, {
+        y: "50vh",
+        duration: 0.5,
+        ease: "power2.in",
+      })
 
-    // 2 — Splat: squish dot flat
-    .to(dot, {
-      scaleX: 4,
-      scaleY: 0.1,
-      duration: 0.1, // Faster splat
-      ease: "power4.out",
-    })
+      // 2 — Splat: squish dot flat
+      .to(dot, {
+        scaleX: 4,
+        scaleY: 0.1,
+        duration: 0.1,
+        ease: "power4.out",
+      })
 
-    // 2b — Particles burst
-    .set(particles, (i: number) => ({
-      x: PARTICLES[i]?.x ?? 0,
-      y: PARTICLES[i]?.y ?? 0,
-      opacity: 1,
-      scale: Math.random() * 0.5 + 0.5,
-    }), "<")
+      // 2b — Particles burst
+      .set(particles, (i: number) => ({
+        x: PARTICLES[i]?.x ?? 0,
+        y: PARTICLES[i]?.y ?? 0,
+        opacity: 1,
+        scale: Math.random() * 0.5 + 0.5,
+      }), "<")
 
-    // 2c — Particles drift and fade
-    .to(particles, (i: number) => ({
-      x: (PARTICLES[i]?.x ?? 0) * 2,
-      y: (PARTICLES[i]?.y ?? 0) * 1.5 + 20,
-      opacity: 0,
-      duration: 0.4,
-      ease: "power2.out",
-    }), "<")
+      // 2c — Particles drift and fade
+      .to(particles, (i: number) => ({
+        x: (PARTICLES[i]?.x ?? 0) * 2,
+        y: (PARTICLES[i]?.y ?? 0) * 1.5 + 20,
+        opacity: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      }), "<")
 
-    // 3 — Dot snaps back and expands to fill or fades
-    .to(dot, {
-      scaleX: 1,
-      scaleY: 1,
-      duration: 0.15,
-      ease: "elastic.out(1, 0.3)",
-    })
-    .to(dot, { 
-      opacity: 0, 
-      scale: 0.5,
-      duration: 0.15,
-      ease: "power2.in"
-    })
+      // 3 — Dot snaps back and expands to fill or fades
+      .to(dot, {
+        scaleX: 1,
+        scaleY: 1,
+        duration: 0.15,
+        ease: "elastic.out(1, 0.3)",
+      })
+      .to(dot, { 
+        opacity: 0, 
+        scale: 0.5,
+        duration: 0.15,
+        ease: "power2.in"
+      })
 
-    // 4 — Text reveals in center
-    .set(textEl, { opacity: 1 }, "-=0.1")
-    .to(letters, {
-      y: 0,
-      opacity: 1,
-      stagger: 0.03, // Faster stagger
-      duration: 0.6,
-      ease: "power4.out",
-    }, "<")
+      // 4 — Text reveals in center
+      .set(textEl, { opacity: 1 }, "-=0.1")
+      .to(letters, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.03,
+        duration: 0.6,
+        ease: "power4.out",
+      }, "<")
 
-    // 5 — Hold briefly
-    .to({}, { duration: 0.3 }) // Shorter hold
+      // 5 — Hold briefly
+      .to({}, { duration: 0.3 })
 
-    // 6 — Premium reveal
-    .to(loader, {
-      yPercent: -100,
-      duration: 0.8, // Faster reveal
-      ease: "expo.inOut",
-    });
+      // 6 — Premium reveal
+      .to(loader, {
+        yPercent: -100,
+        duration: 0.8,
+        ease: "expo.inOut",
+      });
+    }, loaderRef);
 
-    return () => { tl.kill(); };
+    return () => ctx.revert();
   }, [onComplete]);
 
   const skip = () => {
@@ -197,23 +190,21 @@ export default function Loader({ onComplete }: LoaderProps) {
           height: "100%",
         }}
       >
-        {/* Falling Dot - BIGGER as requested */}
         <div
           ref={dotRef}
           style={{
             position: "absolute",
             top: 0,
             left: "50%",
-            width: 24, // Bada kar diya
-            height: 24, // Bada kar diya
-            marginLeft: -12, // Center adjustment
+            width: 24,
+            height: 24,
+            marginLeft: -12,
             borderRadius: "50%",
             backgroundColor: "#0D0D0D",
             transformOrigin: "center bottom",
           }}
         />
 
-        {/* Particles - anchored to center (y=50vh) */}
         {PARTICLES.map((_, i) => (
           <div
             key={i}
@@ -233,7 +224,6 @@ export default function Loader({ onComplete }: LoaderProps) {
           />
         ))}
 
-        {/* Logo Text - centered around the landing point */}
         <div
           ref={textRef}
           style={{
@@ -250,7 +240,7 @@ export default function Loader({ onComplete }: LoaderProps) {
           <span
             style={{
               display: "inline-flex",
-              fontSize: "clamp(3rem, 8vw, 6rem)", // More impactful
+              fontSize: "clamp(3rem, 8vw, 6rem)",
               fontWeight: 900,
               letterSpacing: "-0.05em",
               color: "#0D0D0D",

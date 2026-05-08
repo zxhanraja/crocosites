@@ -19,9 +19,24 @@ const team = [
   },
 ];
 
+import { useTranslation } from "@/lib/TranslationContext";
+
 export default function Team() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
+  const { t } = useTranslation();
+
+  const teamData = [
+    {
+      name: "Harshit Patidar",
+      role: t.team.m1.role,
+      funRole: t.team.m1.funRole,
+      image: "/images/founder.webp",
+      status: t.team.m1.status,
+      funStatus: t.team.m1.funStatus,
+      tools: ["Figma", "Next.js", "GSAP"]
+    },
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -51,22 +66,22 @@ export default function Team() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-24 md:py-40 px-6 md:px-8 bg-background border-t border-border">
+    <section ref={containerRef} className="py-24 md:py-40 px-6 md:px-8 bg-background border-t border-border overflow-hidden">
       <div className="max-w-[1600px] mx-auto">
         <div className="flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-16">
           
           <div className="w-full lg:w-1/3 team-left">
-            <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-foreground/40 mb-6 md:mb-8">The Studio</p>
+            <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-foreground/40 mb-6 md:mb-8">{t.team.label}</p>
             <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-foreground mb-6 md:mb-8 leading-[1.1]">
-              A boutique team of design obsessed creators.
+              {t.team.title}
             </h2>
             <p className="text-foreground/50 text-base md:text-lg leading-relaxed">
-              We focus on quality over quantity. Every project is handled directly by our lead designers to ensure the highest standard of Swiss International style.
+              {t.team.subtitle}
             </p>
           </div>
 
           <div className="w-full lg:w-1/2 flex justify-center team-right">
-            {team.map((member, i) => (
+            {teamData.map((member, i) => (
               <div 
                 key={i} 
                 className="group flex flex-col gap-6 max-w-sm w-full cursor-none-cursor"
@@ -77,8 +92,7 @@ export default function Team() {
                   
                   {/* Status Badge */}
                   <div className="absolute top-6 right-6 z-10">
-                    <div className="bg-foreground text-background px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-lg">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                    <div className="bg-foreground/90 backdrop-blur-md text-background px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-[0.2em] flex items-center shadow-2xl">
                       {hoveredMember === i ? member.funStatus : member.status}
                     </div>
                   </div>

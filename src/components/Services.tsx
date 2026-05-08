@@ -6,27 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const services = [
-  {
-    num: "01",
-    title: "Design",
-    desc: "We make website designs that engage your audience and create the user experience you want.",
-    funny: "Making things look so expensive that your competitors will start crying. (Tissues not included)",
-  },
-  {
-    num: "02",
-    title: "Development",
-    desc: "Bringing visual to life through developing highly functional web solutions.",
-    funny: "Turning large amounts of coffee into bug-free code. We speak fluent Nerd, so you don't have to.",
-  },
-  {
-    num: "03",
-    title: "The Full Package",
-    desc: "Get the best of both worlds for your website, capture your brand identity and get fully functional features.",
-    funny: "Total digital dominance. We'll build everything but your confidence. (That's on you, champ)",
-  },
-];
-
 import { useTranslation } from "@/lib/TranslationContext";
 
 export default function Services() {

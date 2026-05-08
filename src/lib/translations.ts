@@ -71,6 +71,22 @@ export const translations = {
       letsTalk: "Let's Talk",
       email: "hello@crocosites.com",
       copyright: "© 2024 Crocosites Studio. All rights reserved.",
+    },
+    team: {
+      label: "The Studio",
+      title: "A boutique team of design obsessed creators.",
+      subtitle: "We focus on quality over quantity. Every project is handled directly by our lead designers to ensure the highest standard of Swiss International style.",
+      m1: {
+        role: "Founder / Lead Designer",
+        funRole: "Professional Coffee Drinker",
+        status: "In Studio",
+        funStatus: "Thinking...",
+      }
+    },
+    stats: {
+      s1: { label: "Happy Clients", value: "50+" },
+      s2: { label: "Projects Done", value: "120+" },
+      s3: { label: "Years Exp.", value: "5+" },
     }
   },
   hi: {
@@ -127,7 +143,7 @@ export const translations = {
       },
       step4: {
         title: "एनालिटिक्स सेटअप / सपोर्ट",
-        detail: "हम सिर्फ लॉन्च करके नहीं छोड़ते। हम यह साबित करने के लिए डेटा ट्रैकिंग सेट करते हैं कि यह काम करता है, और निरंतर सहायता प्रदान करते हैं ताकि आप कभी भी डिजिटल अंधेरे में न रहें।",
+        detail: "हमर्फ़ लॉन्च करके नहीं छोड़ते। हम यह साबित करने के लिए डेटा ट्रैकिंग सेट करते हैं कि यह काम करता है, और निरंतर सहायता प्रदान करते हैं ताकि आप कभी भी डिजिटल अंधेरे में न रहें।",
       },
     },
     projects: {
@@ -144,6 +160,22 @@ export const translations = {
       letsTalk: "बात करें",
       email: "hello@crocosites.com",
       copyright: "© 2024 क्रोकोसाइट्स स्टूडियो। सर्वाधिकार सुरक्षित।",
+    },
+    team: {
+      label: "स्टूडियो",
+      title: "डिज़ाइन के प्रति समर्पित रचनाकारों की एक टीम।",
+      subtitle: "हम मात्रा से अधिक गुणवत्ता पर ध्यान केंद्रित करते हैं। स्विस इंटरनेशनल स्टाइल के उच्चतम मानक को सुनिश्चित करने के लिए हर प्रोजेक्ट को सीधे हमारे लीड डिजाइनरों द्वारा संभाला जाता है।",
+      m1: {
+        role: "संस्थापक / लीड डिज़ाइनर",
+        funRole: "पेशेवर कॉफी पीने वाला",
+        status: "स्टूडियो में",
+        funStatus: "सोच रहा हूँ...",
+      }
+    },
+    stats: {
+      s1: { label: "खुश ग्राहक", value: "50+" },
+      s2: { label: "प्रोजेक्ट्स पूरे", value: "120+" },
+      s3: { label: "वर्षों का अनुभव", value: "5+" },
     }
   }
 };

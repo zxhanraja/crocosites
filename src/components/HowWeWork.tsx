@@ -3,35 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from "@/lib/TranslationContext";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const steps = [
-  { 
-    num: "01.", 
-    title: "UX / Wireframing",
-    detail: "We dive deep into your brand's DNA to map out user journeys that don't just look good, but convert like crazy. This is where we build the skeleton of your success."
-  },
-  { 
-    num: "02.", 
-    title: "Web Design",
-    detail: "Our design philosophy is 'Swiss on steroids'. Bold typography, intentional whitespace, and a minimalist aesthetic that makes your brand feel like a luxury watch."
-  },
-  { 
-    num: "03.", 
-    title: "Web Development",
-    detail: "Clean code, blazing speed, and no-nonsense performance. We build on modern stacks to ensure your site works as hard as you do, on every device."
-  },
-  { 
-    num: "04.", 
-    title: "Analytics Setup / Support",
-    detail: "We don't just launch and leave. We set up data tracking to prove it works, and provide ongoing support so you're never left in the digital dark."
-  },
-];
-
-import { useTranslation } from "@/lib/TranslationContext";
 
 export default function HowWeWork() {
   const containerRef = useRef<HTMLDivElement>(null);
