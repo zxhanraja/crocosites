@@ -32,7 +32,7 @@ export default function Home() {
       <div
         style={{
           opacity: heroReady ? 1 : 0,
-          transition: "opacity 0.3s ease",
+          transition: "opacity 1s ease-in-out",
         }}
       >
         <Navbar />
