@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   description: "Web design & development agency following the Swiss International Typographic Style.",
 };
 
+import { TranslationProvider } from "@/lib/TranslationContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,9 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${dmSans.variable}`}>
       <body className="antialiased">
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+        <TranslationProvider>
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
+        </TranslationProvider>
       </body>
     </html>
   );

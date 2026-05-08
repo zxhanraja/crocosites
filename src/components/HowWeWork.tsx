@@ -31,9 +31,19 @@ const steps = [
   },
 ];
 
+import { useTranslation } from "@/lib/TranslationContext";
+
 export default function HowWeWork() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const { t } = useTranslation();
+
+  const steps = [
+    { num: "01.", title: t.howWeWork.step1.title, detail: t.howWeWork.step1.detail },
+    { num: "02.", title: t.howWeWork.step2.title, detail: t.howWeWork.step2.detail },
+    { num: "03.", title: t.howWeWork.step3.title, detail: t.howWeWork.step3.detail },
+    { num: "04.", title: t.howWeWork.step4.title, detail: t.howWeWork.step4.detail },
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -74,7 +84,7 @@ export default function HowWeWork() {
   }, []);
 
   return (
-    <section id="about" ref={containerRef} className="relative py-24 md:py-40 px-6 md:px-8 bg-background">
+    <section id="about" ref={containerRef} className="relative py-24 md:py-40 px-6 md:px-8 bg-background overflow-hidden">
       
       {/* Vertical Swiss Text on Right */}
       <div className="vertical-text absolute right-[-12rem] top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block opacity-40">
@@ -89,10 +99,10 @@ export default function HowWeWork() {
           {/* Left: Title, Subtext & Image */}
           <div className="lg:col-span-5 work-left">
             <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-foreground mb-8 md:mb-10 leading-[1.1]">
-              My way of getting things done
+              {t.howWeWork.title}
             </h2>
             <p className="text-foreground/50 text-sm md:text-base max-w-sm leading-relaxed mb-10 md:mb-12">
-              Fast and transparent, the path to creating a website that will represent your brand in the best light is only 4 weeks away. Standardizing the Webflow methodology, I assure a step-by-step completion of the whole process.
+              {t.howWeWork.subtitle}
             </p>
             
             <div className="relative w-full aspect-[4/3] rounded-xl md:rounded-2xl overflow-hidden shadow-xl">

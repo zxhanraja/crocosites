@@ -19,7 +19,7 @@ export default function Home() {
   const [heroReady, setHeroReady] = useState(false);
 
   return (
-    <main className="relative">
+    <main className="relative overflow-x-hidden">
       <CustomCursor />
       <Loader onComplete={() => setHeroReady(true)} />
 

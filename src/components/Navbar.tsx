@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { useTranslation } from "@/lib/TranslationContext";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useTranslation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -14,7 +13,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const links = ["About", "Services", "Projects", "Contact"];
+  const links = [
+    { name: t.nav.about, id: "about" },
+    { name: t.nav.services, id: "services" },
+    { name: t.nav.projects, id: "projects" },
+    { name: t.nav.contact, id: "contact" },
+  ];
 
   return (
     <>
@@ -26,7 +30,7 @@ export default function Navbar() {
             : "py-8"
         )}
       >
-        <div className="max-w-[1600px] mx-auto px-8 flex justify-between items-center">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-8 flex justify-between items-center">
           {/* Logo */}
           <Link
             href="/"
@@ -37,31 +41,63 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8">
             {links.map((link) => (
               <Link
-                key={link}
-                href={`#${link.toLowerCase()}`}
+                key={link.id}
+                href={`#${link.id}`}
                 className="text-[11px] font-bold tracking-[0.18em] uppercase text-foreground/50 hover:text-foreground transition-colors duration-300"
               >
-                {link}
+                {link.name}
               </Link>
             ))}
-            <Link href="#contact" className="btn-outline text-[11px] ml-4">
-              Let&apos;s Talk →
+            
+            {/* Language Switcher */}
+            <div className="flex items-center gap-3 ml-4 border-l border-border pl-8">
+              <button 
+                onClick={() => setLanguage("hi")}
+                className={cn(
+                  "text-[10px] font-black uppercase tracking-widest transition-colors",
+                  language === "hi" ? "text-foreground" : "text-foreground/30 hover:text-foreground/60"
+                )}
+              >
+                Hindi
+              </button>
+              <span className="text-foreground/20">|</span>
+              <button 
+                onClick={() => setLanguage("en")}
+                className={cn(
+                  "text-[10px] font-black uppercase tracking-widest transition-colors",
+                  language === "en" ? "text-foreground" : "text-foreground/30 hover:text-foreground/60"
+                )}
+              >
+                EN
+              </button>
+            </div>
+
+            <Link href="#contact" className="btn-outline text-[11px] ml-4 px-6 py-3">
+              {t.nav.letsTalk} →
             </Link>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden flex flex-col gap-1.5 p-2"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span className={cn("w-6 h-px bg-foreground block transition-all duration-300", menuOpen && "rotate-45 translate-y-[7px]")} />
-            <span className={cn("w-6 h-px bg-foreground block transition-all duration-300", menuOpen && "opacity-0")} />
-            <span className={cn("w-6 h-px bg-foreground block transition-all duration-300", menuOpen && "-rotate-45 -translate-y-[7px]")} />
-          </button>
+          {/* Mobile hamburger & Language */}
+          <div className="flex items-center gap-4 md:hidden">
+            <button 
+              onClick={() => setLanguage(language === "en" ? "hi" : "en")}
+              className="text-[10px] font-black uppercase tracking-widest border border-border px-3 py-1.5 rounded-full"
+            >
+              {language === "en" ? "Hindi" : "EN"}
+            </button>
+            <button
+              className="flex flex-col gap-1.5 p-2"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+            >
+              <span className={cn("w-6 h-px bg-foreground block transition-all duration-300", menuOpen && "rotate-45 translate-y-[7px]")} />
+              <span className={cn("w-6 h-px bg-foreground block transition-all duration-300", menuOpen && "opacity-0")} />
+              <span className={cn("w-6 h-px bg-foreground block transition-all duration-300", menuOpen && "-rotate-45 -translate-y-[7px]")} />
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -72,12 +108,12 @@ export default function Navbar() {
       )}>
         {links.map((link) => (
           <Link
-            key={link}
-            href={`#${link.toLowerCase()}`}
+            key={link.id}
+            href={`#${link.id}`}
             onClick={() => setMenuOpen(false)}
             className="text-4xl font-black text-foreground uppercase tracking-tighter hover:text-accent transition-colors"
           >
-            {link}
+            {link.name}
           </Link>
         ))}
         <Link 
@@ -85,7 +121,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(false)}
           className="mt-8 px-10 py-4 bg-foreground text-background rounded-full text-sm font-black uppercase tracking-widest"
         >
-          Let&apos;s Talk →
+          {t.nav.letsTalk} →
         </Link>
       </div>
     </>

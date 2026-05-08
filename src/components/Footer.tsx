@@ -8,8 +8,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+import { useTranslation } from "@/lib/TranslationContext";
+
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!footerRef.current) return;
@@ -63,22 +66,22 @@ export default function Footer() {
             <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-xl md:rounded-2xl overflow-hidden shrink-0 mt-2 shadow-lg transform -rotate-3 hover:rotate-0 transition-transform duration-500">
               <Image
                 src="/images/founder.webp"
-                alt="Harshit Patidar"
+                alt="Founder"
                 fill
                 className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
             </div>
             <h2 className="text-3xl md:text-7xl font-medium tracking-tight leading-[1.1] md:leading-[1] text-foreground">
-              Let&apos;s talk about a project, collaboration or an idea you may have
+              {t.footer.letsTalk}
             </h2>
           </div>
           
           <div className="footer-right w-full lg:w-auto">
             <Link 
-              href="mailto:hello@crocosites.com" 
+              href={`mailto:${t.footer.email}`} 
               className="inline-block w-full lg:w-auto text-center bg-foreground text-background px-10 md:px-12 py-5 md:py-6 rounded-full text-xs md:text-sm font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-xl"
             >
-              Drop me a line →
+              {t.hero.cta} →
             </Link>
           </div>
         </div>
@@ -86,7 +89,7 @@ export default function Footer() {
         {/* Bottom Legal Section */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-10 pt-12 border-t border-border footer-bottom">
           <div className="text-[9px] md:text-[10px] font-medium text-foreground/40 uppercase tracking-widest text-center md:text-left">
-            © 2026 All Rights Reserved. crocosites
+            {t.footer.copyright}
           </div>
           
           <div className="flex flex-wrap justify-center gap-6 md:gap-10 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-foreground/60">

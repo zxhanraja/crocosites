@@ -45,15 +45,26 @@ const projects = [
   },
 ];
 
+import { useTranslation } from "@/lib/TranslationContext";
+
 export default function Projects() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
+  const { t } = useTranslation();
 
-  const safeIdx = activeIdx % projects.length;
-  const currentProject = projects[safeIdx] || projects[0];
+  const projectsData = [
+    { num: "01", title: t.projects.p1.title, category: t.projects.p1.category, image: "/images/p1.webp" },
+    { num: "02", title: t.projects.p2.title, category: t.projects.p2.category, image: "/images/p2.webp" },
+    { num: "03", title: t.projects.p3.title, category: t.projects.p3.category, image: "/images/p3.webp" },
+    { num: "04", title: t.projects.p4.title, category: t.projects.p4.category, image: "/images/p4.webp" },
+    { num: "05", title: t.projects.p5.title, category: t.projects.p5.category, image: "/images/p5.webp" },
+  ];
+
+  const safeIdx = activeIdx % projectsData.length;
+  const currentProject = projectsData[safeIdx] || projectsData[0];
 
   const handleNext = () => {
-    setActiveIdx((prev) => (prev + 1) % projects.length);
+    setActiveIdx((prev) => (prev + 1) % projectsData.length);
   };
 
   useEffect(() => {
@@ -95,16 +106,16 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" ref={containerRef} className="py-24 md:py-40 px-6 md:px-8 bg-background">
+    <section id="projects" ref={containerRef} className="py-24 md:py-40 px-6 md:px-8 bg-background overflow-hidden">
       <div className="max-w-[1600px] mx-auto">
         
         {/* Header */}
         <div className="flex justify-between items-start mb-24 border-b border-border pb-8 projects-header">
           <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-foreground/40">
-            Featured Projects
+            {t.projects.label}
           </p>
           <p className="text-[10px] md:text-xs font-medium text-foreground/30 max-w-[150px] md:max-w-[200px] text-right">
-            Click to discover.
+            {t.projects.sublabel}
           </p>
         </div>
 
@@ -113,8 +124,8 @@ export default function Projects() {
           {/* Left: Active Project Info */}
           <div className="md:col-span-1 lg:col-span-5 flex flex-col justify-center project-info">
             <div className="flex gap-8 items-start">
-              {/* Vertical Project Number */}
-              <span className="text-2xl md:text-4xl font-black text-foreground/10 uppercase tracking-tighter origin-top-left rotate-90 whitespace-nowrap pt-2">
+              {/* Vertical Project Number - Fixed for mobile */}
+              <span className="text-2xl md:text-4xl font-black text-foreground/10 uppercase tracking-tighter origin-top-left rotate-90 whitespace-nowrap pt-2 translate-x-[20%] md:translate-x-0">
                 Proj. {currentProject.num}
               </span>
 
@@ -130,7 +141,7 @@ export default function Projects() {
                   onClick={handleNext}
                   className="mt-12 text-xs font-black uppercase tracking-[0.3em] border-b-2 border-foreground pb-2 w-fit hover:text-accent hover:border-accent transition-colors"
                 >
-                  Next Project →
+                  {t.projects.next} →
                 </button>
               </div>
             </div>
@@ -142,7 +153,7 @@ export default function Projects() {
               className="relative w-full max-w-xl aspect-[16/10] cursor-pointer"
               onClick={handleNext}
             >
-              {projects.map((p, i) => {
+              {projectsData.map((p, i) => {
                 const isFront = i === safeIdx;
                 
                 return (
