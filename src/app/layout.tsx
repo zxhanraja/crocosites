@@ -14,8 +14,12 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Crocosites. | We build websites that work as hard as you do.",
-  description: "Web design & development agency following the Swiss International Typographic Style.",
+  title: "Crocosites | Premium Web Agency",
+  description: "Specializing in High-End Design, UI/UX, Webflow, and Front-End Development.",
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 import { TranslationProvider } from "@/lib/TranslationContext";

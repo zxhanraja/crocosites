@@ -88,9 +88,9 @@ export default function Hero({ startAnimations = true }: HeroProps) {
         </div>
 
         {/* Middle/Bottom Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-end mt-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-end mt-auto">
           {/* Tagline and Button */}
-          <div className="lg:col-span-5 hero-info">
+          <div className="lg:col-span-5 hero-info order-2 lg:order-1 mt-10 lg:mt-0">
             <p className="text-xl md:text-3xl font-normal leading-tight text-foreground/80 mb-10 max-w-lg">
               {t.hero.tagline}
             </p>
@@ -100,7 +100,7 @@ export default function Hero({ startAnimations = true }: HeroProps) {
           </div>
           
           {/* Socials */}
-          <div className="hidden md:block lg:col-span-3 lg:offset-1 hero-info pb-1">
+          <div className="hidden md:block lg:col-span-3 lg:offset-1 hero-info pb-1 lg:order-2">
             <div className="flex flex-col gap-4 text-xs font-bold uppercase tracking-widest text-foreground/40">
               <span>{t.hero.followUs}</span>
               <div className="flex flex-col gap-2 text-foreground">
@@ -112,8 +112,8 @@ export default function Hero({ startAnimations = true }: HeroProps) {
           </div>
 
           {/* Floating Image */}
-          <div className="lg:col-span-3 hero-image relative lg:-translate-y-16 mt-8 lg:mt-0 flex justify-center lg:block">
-            <div className="relative w-[65%] md:w-full aspect-[4/3] md:aspect-square lg:aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 cursor-pointer">
+          <div className="lg:col-span-3 hero-image relative lg:-translate-y-16 mt-0 lg:mt-0 flex justify-center lg:block order-1 lg:order-3">
+            <div className="relative w-[50%] md:w-full aspect-[4/3] md:aspect-square lg:aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 cursor-pointer">
               <Image
                 src="/images/hero-section.webp"
                 alt="Crocosites Studio"
